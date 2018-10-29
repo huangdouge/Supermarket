@@ -1,47 +1,37 @@
 <!--pages/shoppingcar/shop_car.wxml-->
-<view class="shop">
- <view class="shop-check">
-    <view class="chexkbox"></view>
- </view>
- <image class="shop-img" src="/image/s5.png" mode="aspectFill" lazy-load></image>
- <view class="shop-info">
-   <text>新鲜芹菜 半斤</text>
-   <view class="shop-button">
-     <text class="shop-sign">-</text>
-     <text>4</text>
-     <text class="shop-add">+</text>
-   </view>
- </view>
- <view class="shop-price">
-   <text>￥0.01</text>
-   <text class="delete">X</text>
- </view>
-</view>
-<view class="shop">
- <view class="shop-check">
-    <view class="chexkbox"></view>
- </view>
- <image class="shop-img" src="/image/s6.png" mode="aspectFill" lazy-load></image>
- <view class="shop-info">
-   <text>素米 500g</text>
-   <view class="shop-button">
-     <text class="shop-sign">-</text>
-     <text>1</text>
-     <text class="shop-add">+</text>
-   </view>
- </view>
- <view class="shop-price">
-   <text>￥0.03</text>
-   <text class="delete">X</text>
- </view>
-</view>
-
-
-<view class="total">
+<view wx:if="{{haslist}}">
+ <view class="shop" wx:for="{{cartlist}}" wx:key="pid">
   <view class="shop-check">
-   <view class="chexkbox"></view>
+    <icon wx:if="{{item.is_checked}}" type="success" color="red" data-index="{{index}}"  bindtap="selectList"/>
+    <icon wx:else type="circle"  data-index="{{index}}" bindtap="selectList"/>
   </view>
-  <text class="checkall">全选</text>
-  <text class="total-price">￥0.00</text>
-  <text class="arrow">➔</text>
+  <image class="shop-img" src="https://myserver.applinzi.com/{{item.img}}" mode="aspectFill" lazy-load></image>
+  <view class="shop-info">
+   <text>{{item.name}}</text>
+   <view class="shop-button">
+     <text class="shop-sign" bindtap="subNum" data-index="{{index}}">-</text>
+     <text class="shop-number">{{item.count_num}}</text>
+     <text class="shop-add" bindtap="addNum" data-index="{{index}}">+</text>
+   </view>
+  </view>
+  <view class="shop-price">
+   <text>￥{{item.price}}</text>
+   <text class="delete" bindtap='deletelist' data-index="{{index}}">X</text>
+  </view>
+
+  <view class="total">
+   <view class="selectAll">
+    <icon wx:if="{{selectAll}}" type="success" color="white" data-index="{{index}}" bindtap="selectAll"></icon> 
+    <icon wx:else type="circle" data-index="{{index}}" bindtap="selectAll"></icon>
+   </view>
+     <text class="checkall">全选</text>
+     <text class="total-price">￥{{totalprice}}</text>
+     <text class="shop-arrow">➔</text>
+   </view>
+ </view>
 </view>
+
+ <view wx:else>
+      <view class="cart-no-data">购物车是空的哦~</view>
+ </view>
+
