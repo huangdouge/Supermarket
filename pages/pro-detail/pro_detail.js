@@ -91,7 +91,6 @@ Page({
     wx.switchTab({
       url: '../shoppingcar/shop_car?pid=' + pid,
     })
-
   },
   Total: function () {
     var n = this.data.number + 1;
@@ -104,10 +103,13 @@ Page({
     console.log(e)
     var pid=e.target.dataset.pid;
   //  console.log(pid)
-      //console.log(this.data.user_id)
+      //console.log(this.data.user_id)  ---->undefine (未传值，用1001测试)
       //console.log(this.data.number);
       //console.log(e.target.dataset.pid)
     //向数据库插入数据
+    wx.switchTab({
+      url: '../shoppingcar/shop_car?pid=' + pid,
+    })
     wx.request({
       url: 'https://myserver.applinzi.com/supOrder/addPro',
       data: {
